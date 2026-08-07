@@ -1,0 +1,87 @@
+age,brood_year,rearing,adult_origin,RelSite,CWT code,F,M,jack,origin
+5,2020,subyearling,SR hatchery,BCA1,220291,146,42,0,hatchery
+5,2020,subyearling,SR hatchery,BCA2,220292,42,13,0,hatchery
+5,2020,subyearling,SR hatchery,CJA1,220289,83,81,0,hatchery
+5,2020,subyearling,SR hatchery,CJA2,220290,15,15,0,hatchery
+5,2020,subyearling,SR hatchery,GRR,637941,27,27,0,hatchery
+5,2020,subyearling,SR hatchery,IPCSR,91579,197,94,0,hatchery
+5,2020,subyearling,SR hatchery,LFSO,637940,197,60,0,hatchery
+5,2020,yearling,SR hatchery,LFYO,637944,224,65,0,hatchery
+5,2020,subyearling,SR hatchery,PLA1,220293,70,15,0,hatchery
+5,2020,subyearling,SR hatchery,PLA2,220294,54,0,0,hatchery
+4,2021,subyearling,SR hatchery,BCA1,220407,460,138,0,hatchery
+4,2021,subyearling,SR hatchery,BCA2,220408,150,42,0,hatchery
+4,2021,subyearling,SR hatchery,CJA1,220405,610,247,0,hatchery
+4,2021,subyearling,SR hatchery,CJA2,220406,260,41,0,hatchery
+4,2021,subyearling,SR hatchery,IPCSR,92064,839,368,0,hatchery
+4,2021,subyearling,SR hatchery,LFSO,638056,542,223,0,hatchery
+4,2021,yearling,SR hatchery,LFYO,638417,754,464,9,hatchery
+4,2021,subyearling,SR hatchery,PLA1,220403,399,203,0,hatchery
+4,2021,subyearling,SR hatchery,PLA2,220404,276,134,0,hatchery
+3,2022,subyearling,SR hatchery,BCA1,220039,391,980,0,hatchery
+3,2022,subyearling,SR hatchery,BCA2,220036,98,182,0,hatchery
+3,2022,subyearling,SR hatchery,CJA1,220034,374,738,14,hatchery
+3,2022,subyearling,SR hatchery,CJA2,220035,183,275,15,hatchery
+3,2022,subyearling,SR hatchery,GRR,638057,137,351,0,hatchery
+3,2022,subyearling,SR hatchery,IPCSR,90011,1256,1846,29,hatchery
+3,2022,subyearling,SR hatchery,LFSO,220038,589,921,0,hatchery
+3,2022,yearling,SR hatchery,LFYO,638078,21,103,57,hatchery
+3,2022,subyearling,SR hatchery,PLA1,220037,304,752,0,hatchery
+3,2022,subyearling,SR hatchery,PLA2,220037,115,370,0,hatchery
+2,2023,subyearling,SR hatchery,BCA1,220049,0,0,56,hatchery
+2,2023,subyearling,SR hatchery,BCA2,220050,0,13,90,hatchery
+2,2023,subyearling,SR hatchery,CJA1,220051,0,29,206,hatchery
+2,2023,subyearling,SR hatchery,CJA2,220052,0,12,46,hatchery
+2,2023,subyearling,SR hatchery,GRR,638511,0,0,40,hatchery
+2,2023,subyearling,SR hatchery,IPCSR,0,0,106,415,hatchery
+2,2023,subyearling,SR hatchery,LFSO,638509,0,0,436,hatchery
+2,2023,yearling,SR hatchery,LFYO,0,0,0,14,hatchery
+2,2023,subyearling,SR hatchery,PLA1,220047,0,17,143,hatchery
+2,2023,subyearling,SR hatchery,PLA2,220048,0,0,15,hatchery
+5,2020,subyearling,SR hatchery,CFA,220278,14,0,0,hatchery
+5,2020,subyearling,SR hatchery,LGA,220279,88,14,0,hatchery
+5,2020,subyearling,SR hatchery,NLVA,220280,67,30,0,hatchery
+5,2020,subyearling,SR hatchery,NPTH,220274,205,70,0,hatchery
+4,2021,subyearling,SR hatchery,CFA,220287,39,39,0,hatchery
+4,2021,subyearling,SR hatchery,LGA,220288,203,86,0,hatchery
+4,2021,subyearling,SR hatchery,NA,0,0,0,0,hatchery
+4,2021,subyearling,SR hatchery,NLVA,220286,200,72,0,hatchery
+4,2021,subyearling,SR hatchery,NPTH,220285,97,131,0,hatchery
+3,2022,subyearling,SR hatchery,CFA,220414,42,55,0,hatchery
+3,2022,subyearling,SR hatchery,LGA,220415,72,68,0,hatchery
+3,2022,subyearling,SR hatchery,NLVA,220413,88,301,0,hatchery
+3,2022,subyearling,SR hatchery,NPTH,220412,0,30,0,hatchery
+2,2023,subyearling,SR hatchery,CFA,0,0,0,12,hatchery
+5,2020,subyearling,stray,LWSH,0,43,9,0,hatchery
+5,2020,subyearling,stray,RSFH,0,21,31,0,hatchery
+5,2020,subyearling,stray,UMFH,0,0,8,0,hatchery
+4,2021,subyearling,stray,LWSH,0,154,223,0,hatchery
+4,2021,subyearling,stray,PRFH,0,103,85,0,hatchery
+4,2021,subyearling,stray,RSFH,0,50,20,0,hatchery
+4,2021,subyearling,stray,UMFH,0,51,17,0,hatchery
+3,2022,subyearling,stray,LWSH,0,50,291,0,hatchery
+3,2022,subyearling,stray,PRFH,0,51,145,15,hatchery
+3,2022,subyearling,stray,Prosser,0,0,10,0,hatchery
+3,2022,subyearling,stray,RSFH,0,0,28,0,hatchery
+2,2023,subyearling,stray,LWSH,0,0,0,7,hatchery
+2,2023,subyearling,stray,UMFH,0,0,0,16,hatchery
+2,2023,subyearling,SR hatchery,Unassigned,,0,1,34,hatchery_unknown
+3,2022,subyearling,SR hatchery,Unassigned,,19,68,10,hatchery_unknown
+4,2021,subyearling,SR hatchery,Unassigned,,65,43,1,hatchery_unknown
+5,2020,subyearling,SR hatchery,Unassigned,,22,4,0,hatchery_unknown
+6,2019,subyearling,SR hatchery,Unassigned,,0,0,0,hatchery_unknown
+2,2023,yearling,SR hatchery,Unassigned,,0,0,0,hatchery_unknown
+3,2022,yearling,SR hatchery,Unassigned,,0,0,0,hatchery_unknown
+4,2021,yearling,SR hatchery,Unassigned,,0,0,0,hatchery_unknown
+5,2020,yearling,SR hatchery,Unassigned,,0,0,0,hatchery_unknown
+6,2019,yearling,SR hatchery,Unassigned,,0,0,0,hatchery_unknown
+2,2023,subyearling,Wild,Unassigned,,0,18,211,wild
+3,2022,subyearling,Wild,Unassigned,,444,1287,49,wild
+4,2021,subyearling,Wild,Unassigned,,877,703,0,wild
+5,2020,subyearling,Wild,Unassigned,,458,178,0,wild
+6,2019,subyearling,Wild,Unassigned,,20,0,0,wild
+2,2023,yearling,Wild,Unassigned,,0,0,22,wild
+3,2022,yearling,Wild,Unassigned,,0,18,0,wild
+4,2021,yearling,Wild,Unassigned,,143,136,0,wild
+5,2020,yearling,Wild,Unassigned,,88,72,0,wild
+6,2019,yearling,Wild,Unassigned,,44,0,0,wild
