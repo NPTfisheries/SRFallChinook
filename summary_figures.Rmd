@@ -1,0 +1,190 @@
+---
+title: "Snake River Fall Chinook"
+author:
+- Michelle A. Briggs:
+    email: michelleb@nezperce.org
+    institute: npt
+    correspondence: yes
+- William Young:
+    email: billy@nezperce.org
+    institute: npt
+    correspondence: yes
+- Ryan N. Kinzer
+  email: ryank@nezperce.org
+  institute: npt
+date: "`r format(Sys.time(), '%d %B, %Y')`"
+output:
+  bookdown::html_document2:
+    theme: cerulean
+    toc: yes
+    toc_depth: 4
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+    number_sections: yes
+    css: "../templates/styles.css"
+    pandoc_args:
+    - "--lua-filter=templates/scholarly-metadata.lua"
+    - "--lua-filter=templates/author-info-blocks.lua"
+    - "--lua-filter=templates/pagebreak.lua"
+  # bookdown::word_document2:
+  #   toc: yes
+  #   toc_depth: 4
+  #   reference_docx: "../templates/Word_template_draft.docx"
+institute:
+- npt_mccall: Nez Perce Tribe, Department of Fisheries Resources Management, 14054 Burr Dr., McCall, Idaho, 83638, USA
+- npt: Nez Perce Tribe, Department of Fisheries Resources Management
+csl: "templates/american-fisheries-society.csl"
+always_allow_html: yes
+editor_options: 
+  chunk_output_type: console
+---
+ 
+<!-- the following inserts the NPT logo into header and sets a watermark -->
+```{=html}
+<!-- <script> -->
+<!--    $(document).ready(function() { -->
+<!--      $head = $('#header'); -->
+<!--      $head.prepend('<img src=\"NPT.png\" style=\"float: right;width: 140px;\"/>') -->
+<!--      $head.prepend('<img src=\"DFRM.png\" style=\"float: right;width: 140px;\"/>') -->
+<!--    }); -->
+<!-- </script> -->
+ 
+<!-- <style> -->
+<!-- p.caption { -->
+<!--   font-size: 100%; -->
+<!-- } -->
+<!-- </style> -->
+ 
+ 
+<img src="templates/NPT.png" style="position:absolute;top:0px;right:100px;width: 140px;" />
+<img src="templates/DFRM.png" style="position:absolute;top:0px;right:-50px;width: 140px;" />
+<div class="watermark">DRAFT</div>
+
+```
+
+
+
+```{r, include = F}
+library(tidyverse)
+library(ggpubr)
+
+plot_theme <- readRDS("scripts/plot_theme.RDS")
+
+```
+
+
+```{r, include = F}
+hat_by_pbt_chk <- readRDS("output/hat_by_pbt_fromR.RDS")
+
+hat_by_pbt_spreadsheet <- read.csv("data_inputs/hat_by_pbt_check.csv")
+hat_by_pbt_spreadsheet <- hat_by_pbt_spreadsheet %>%
+  pivot_longer(cols = c("F", "M", "jack"), names_to = "Sex", values_to = "spreadsheet_count")
+
+check_output_hatbypbt <- full_join(hat_by_pbt_chk, hat_by_pbt_spreadsheet, 
+                                   by = c("Sex", "brood_year", "RelSite"))  
+
+hat_by_pbt_plot <- ggplot(check_output_hatbypbt, aes(x = spreadsheet_count, y = total)) + 
+  geom_abline(slope = 1, linewidth = 1) +
+  geom_point(size = 4, shape = 21, color = "black", fill = "grey50") + 
+  plot_theme + 
+  xlab("Original method") + 
+  ylab("New method") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
+  ggtitle("")
+  
+```
+
+
+```{r, include = F}
+final_estimates <- readRDS("output/final_estimates.RDS")
+
+final_totals <- read.csv("data_inputs/final_totals_check.csv")
+final_totals <- final_totals %>%
+  pivot_longer(cols = c("F", "M", "jack"), names_to = "Sex", values_to = "spreadsheet_count")
+
+
+check_final <- full_join(final_estimates, final_totals, by = c("Sex", "RelSite", "brood_year", "age", "rearing" , "origin"))
+
+check_final <- check_final %>%
+  mutate(diff = total - spreadsheet_count) %>%
+  mutate(pct_diff = (diff/spreadsheet_count)*100)
+
+summary(check_final$diff)
+
+raw_diff_hist <- ggplot(check_final, aes(x = diff)) + 
+  geom_histogram(fill = "grey", color = "black", binwidth = 5)  + 
+  plot_theme + 
+  xlab("Difference between estimates") + 
+  ylab("Count") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(-50, 150)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 125))
+  
+#My method seems to have slightly underestimated wild fish abundance
+#need to look at where things went wrong
+#likely somewhere in age assignment and particularly age assignment for outage expansion fish
+
+
+final_total_plot <- ggplot(check_final, aes(x = spreadsheet_count, y = total, group = origin)) + 
+  geom_abline(slope = 1, linewidth = 1) +
+  geom_point(size = 4, shape = 21, aes(fill = origin), color = "black") + 
+  plot_theme + 
+  xlab("Original method") + 
+  ylab("New method") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2000))
+
+
+summary_table <- check_final %>%
+  group_by(origin) %>%
+  summarise('New method' = round(sum(total, na.rm = T)), 'Original method' = sum(spreadsheet_count, na.rm = T))
+  
+
+check_final %>%
+  group_by(origin) %>%
+  summarise('New method' = sum(total, na.rm = T), 'Original method' = sum(spreadsheet_count, na.rm = T))
+  
+
+hist_by_origin <- ggplot(check_final, aes(x = diff, group = origin)) + 
+  geom_histogram(aes(fill = origin), color = "black", binwidth = 5)  + 
+  plot_theme + 
+  xlab("Difference between estimates") + 
+  ylab("Count") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(-50, 150)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) + 
+  facet_wrap(~origin) + 
+  theme(strip.background = element_rect(fill = "grey70", color = "black"), 
+        strip.text = element_text(size = 12), 
+        panel.spacing = unit(10, "mm")) + 
+  geom_vline(xintercept = 0, linewidth = 1, linetype = "dashed")
+
+```
+
+
+```{r, echo = F}
+knitr::kable(summary_table, 
+             caption = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam by origin produced by the original and new method.")
+```
+
+
+```{r hat-by-pbt, fig.cap = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam for hatchery-assigned fish by age, sex, and release group. Estimates account for fallback and re-ascension, but do not account for trap outage periods.", echo=F, warning = F}
+hat_by_pbt_plot
+```
+
+```{r final-total, fig.width = 10, fig.cap = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam by age, sex, and release group. Estimates account for fallback and re-ascension and trap outage, including an expansion for the end of the run. Estiamtes account for fallback and re-ascension and trap outage periods.", echo = F, warning = F}
+final_total_plot
+```
+
+
+```{r diff-hist, fig.cap = "The difference in the estimates of escapement by age, sex, and release group between the original and new method. Estiamtes account for fallback and re-ascension and trap outage periods.", echo=F, warning=FALSE}
+raw_diff_hist
+```
+
+
+```{r hist-by-origin, fig.width = 12, fig.height = 7, fig.cap = "The difference in the estimates of escapement by age, sex, and release group between the original and new method. Estiamtes account for fallback and re-ascension and trap outage periods.", echo = F, warning = F}
+hist_by_origin
+```
+
+
+

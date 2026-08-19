@@ -213,7 +213,7 @@ final_estimates <- rbind(hat_by_rel_site_with_outage,
                          wild_with_outage, 
                          hat_unk_by_age)
 
-
+#saveRDS(final_estimates, file = "output/final_estimates.RDS")
 
 
 
@@ -223,11 +223,15 @@ final_estimates <- rbind(hat_by_rel_site_with_outage,
 #check spreadsheet estimates
 
 #match 'Hat by PBT' sheet
+
+
 hat_by_pbt_chk <- hat_assigned %>%
   mutate(Sex = if_else(jack == "jack", "jack", Sex)) %>%
   select(!jack) %>%
   group_by(age, RelSite, Sex, brood_year, rearing) %>%
   summarise(total = sum(count))
+
+#saveRDS(hat_by_pbt_chk, file = "output/hat_by_pbt_fromR.RDS")
 
 hat_by_pbt_spreadsheet <- read.csv("data_inputs/hat_by_pbt_check.csv")
 hat_by_pbt_spreadsheet <- hat_by_pbt_spreadsheet %>%
