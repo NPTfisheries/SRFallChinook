@@ -1,0 +1,89 @@
+agePBT,Brd Yr,rearing,adult_origin,grp,CWT code,Female,Males,jacks,totals,origin
+5,2019,subyearling,SR hatchery,BCA1,220197,285.7236646,124.5625109,0,410.2861754,hatchery
+5,2019,subyearling,SR hatchery,BCA2,220198,114.0057242,32.83770068,0,146.8434249,hatchery
+5,2019,subyearling,SR hatchery,CJA1,220195,414.7122157,80.60481094,0,495.3170267,hatchery
+5,2019,subyearling,SR hatchery,CJA2,220196,195.1253834,31.45509097,0,226.5804744,hatchery
+5,2019,subyearling,SR hatchery,GRR,637759,32.83770068,47.7808228,0,80.61852347,hatchery
+5,2019,subyearling,SR hatchery,IPCSR,91459,602.1861111,79.89610267,0,682.0822138,hatchery
+5,2019,subyearling,SR hatchery,LFSO,637758,616.3702165,254.3806567,0,870.7508732,hatchery
+5,2019,yearling,SR hatchery,LFYO,637762,433.4168172,166.4668538,0,599.883671,hatchery
+5,2019,subyearling,SR hatchery,PLA1,220199,190.9600603,76.58926188,0,267.5493222,hatchery
+5,2019,subyearling,SR hatchery,PLA2,220282,64.31362936,46.81140926,0,111.1250386,hatchery
+4,2020,subyearling,SR hatchery,BCA1,220291,660.2676793,466.1126035,0,1126.380283,hatchery
+4,2020,subyearling,SR hatchery,BCA2,220292,221.7745308,122.2674662,0,344.041997,hatchery
+4,2020,subyearling,SR hatchery,CJA1,220289,1112.666079,693.3152802,0,1805.98136,hatchery
+4,2020,subyearling,SR hatchery,CJA2,220290,160.1405581,45.99584492,0,206.136403,hatchery
+4,2020,subyearling,SR hatchery,GRR,637941,361.0248954,243.8790594,0,604.9039548,hatchery
+4,2020,subyearling,SR hatchery,IPCSR,91579,1370.283825,686.6960608,0,2056.979886,hatchery
+4,2020,subyearling,SR hatchery,LFSO,637940,1295.469846,560.6970807,0,1856.166926,hatchery
+4,2020,yearling,SR hatchery,LFYO,637944,610.7569634,437.6340607,0,1048.391024,hatchery
+4,2020,subyearling,SR hatchery,PLA1,220293,586.9608467,263.2059062,0,850.1667529,hatchery
+4,2020,subyearling,SR hatchery,PLA2,220294,220.0043057,185.6738992,15.49013477,421.1683396,hatchery
+3,2021,subyearling,SR hatchery,BCA1,220407,177.6813982,714.4945994,0,892.1759976,hatchery
+3,2021,subyearling,SR hatchery,BCA2,220408,48.07239479,382.2555459,15.51366168,445.8416023,hatchery
+3,2021,subyearling,SR hatchery,CJA1,220405,145.0523282,792.6830752,0,937.7354034,hatchery
+3,2021,subyearling,SR hatchery,CJA2,220406,98.66991646,290.0119598,31.42513954,420.1070158,hatchery
+3,2021,subyearling,SR hatchery,IPCSR,92064,601.0434176,1265.325873,0,1866.369291,hatchery
+3,2021,subyearling,SR hatchery,LFSO,638056,438.4973202,1127.155948,15.51366168,1581.16693,hatchery
+3,2021,yearling,SR hatchery,LFYO,638417,68.22125906,148.9544641,130.7530146,347.9287377,hatchery
+3,2021,subyearling,SR hatchery,PLA1,220403,377.9614311,801.8243656,59.12574576,1238.911542,hatchery
+3,2021,subyearling,SR hatchery,PLA2,220404,193.8657257,195.6201524,15.51366168,404.9995398,hatchery
+5,2019,subyearling,SR hatchery,CFA,220276,29.14798702,16.30441203,0,45.45239905,hatchery
+5,2019,subyearling,SR hatchery,LGA,220275,14.71377377,31.0181858,0,45.73195957,hatchery
+5,2019,subyearling,SR hatchery,NLVA,220277,96.42426187,47.83132345,0,144.2555853,hatchery
+5,2019,subyearling,SR hatchery,NPTH,220273,194.9578349,77.10076747,0,272.0586023,hatchery
+4,2020,subyearling,SR hatchery,CFA,220278,308.7611544,155.830185,0,464.5913394,hatchery
+4,2020,subyearling,SR hatchery,LGA,220279,393.2102312,199.728927,0,592.9391581,hatchery
+4,2020,subyearling,SR hatchery,NLVA,220280,314.8276682,260.3977384,0,575.2254066,hatchery
+4,2020,subyearling,SR hatchery,NPTH,220274,588.3432205,382.6763635,0,971.019584,hatchery
+3,2021,subyearling,SR hatchery,CFA,220287,16.46163852,97.23776955,0,113.6994081,hatchery
+3,2021,subyearling,SR hatchery,LGA,220288,49.15700311,79.41935444,0,128.5763575,hatchery
+3,2021,subyearling,SR hatchery,NLVA,220286,32.69536459,145.2418991,17.36427631,195.30154,hatchery
+3,2021,subyearling,SR hatchery,NPTH,220285,32.69536459,61.16314324,0,93.85850783,hatchery
+5,2019,subyearling,stray,LWSH,0,49.38287779,16.39048292,0,65.77336071,hatchery
+5,2019,subyearling,stray,PRFH,0,90.51675823,56.5596709,0,147.0764291,hatchery
+5,2019,subyearling,stray,RSFH,0,44.49801781,11.33408122,0,55.83209903,hatchery
+5,2019,yearling,stray,UMFH,0,11.26485311,0,0,11.26485311,hatchery
+4,2020,subyearling,stray,LWSH,0,32.73788072,163.4006022,0,196.1384829,hatchery
+4,2020,subyearling,stray,UMFH,0,23.00842776,34.42823943,0,57.43666719,hatchery
+3,2021,subyearling,stray,RSFH,0,0,35.55606103,0,35.55606103,hatchery
+3,2021,subyearling,stray,UMFH,0,35.19671235,82.67461442,12.40940695,130.2807337,hatchery
+2,2022,subyearling,SR hatchery,BCA1,220039,0,127.6913993,277.2209889,404.9123882,hatchery
+2,2022,subyearling,SR hatchery,BCA2,220036,0,50.59453209,45.09275531,95.6872874,hatchery
+2,2022,subyearling,SR hatchery,CJA1,220034,0,48.0299615,345.0690914,393.0990529,hatchery
+2,2022,subyearling,SR hatchery,CJA2,220035,0,16.86484403,229.6896865,246.5545305,hatchery
+2,2022,subyearling,SR hatchery,GRR,638057,0,14.81636502,197.7605797,212.5769447,hatchery
+2,2022,subyearling,SR hatchery,IPCSR,90011,0,194.7745245,833.0516361,1027.826161,hatchery
+2,2022,subyearling,SR hatchery,LFSO,220038,0,83.9207382,484.4266034,568.3473416,hatchery
+2,2022,subyearling,SR hatchery,LFYO,638078,0,0,263.0387064,263.0387064,hatchery
+2,2022,subyearling,SR hatchery,PLA1,220037,0,50.31161993,244.3137178,294.6253377,hatchery
+2,2022,subyearling,SR hatchery,PLA2,220037,0,0,197.6835308,197.6835308,hatchery
+5,2019,subyearling,stray,WFHsu,0,11.0611674,0,0,11.0611674,hatchery
+2,2022,subyearling,SR hatchery,CFA,220414,0,0,44.60310285,44.60310285,hatchery
+2,2022,subyearling,SR hatchery,LGA,220415,0,0,59.48449929,59.48449929,hatchery
+2,2022,subyearling,SR hatchery,NLVA,220413,0,16.86484403,46.55313808,63.41798211,hatchery
+3,2021,subyearling,stray,LWSH,0,0,137.3237867,31.33206436,168.6558511,hatchery
+3,2021,subyearling,stray,PRFH,0,0,79.11473355,0,79.11473355,hatchery
+4,2020,subyearling,stray,RSFH,0,34.24090255,11.4265206,0,45.66742316,hatchery
+2,2022,subyearling,stray,PRFH,0,0,0,59.95121764,59.95121764,hatchery
+2,2022,subyearling,stray,LWSH,0,0,16.70807311,15.85212674,32.56019986,hatchery
+2,2022,subyearling,SR hatchery,Unkn Hat AD,,0,1.790293366,93.21433992,95.00463329,hatchery_unknown
+3,2021,subyearling,SR hatchery,Unkn Hat AD,,20.51088125,76.95666504,3.927311476,101.3948578,hatchery_unknown
+4,2020,subyearling,SR hatchery,Unkn Hat AD,,119.0159353,113.9573789,0.455372529,233.4286868,hatchery_unknown
+5,2019,subyearling,SR hatchery,Unkn Hat AD,,57.73207422,29.68418843,0,87.41626264,hatchery_unknown
+6,2018,subyearling,SR hatchery,Unkn Hat AD,,0,0,0,0,hatchery_unknown
+2,2022,yearling,SR hatchery,Unkn Hat AD,,0,0,20.59566124,20.59566124,hatchery_unknown
+3,2021,yearling,SR hatchery,Unkn Hat AD,,0,0.53528994,2.696002755,3.231292695,hatchery_unknown
+4,2020,yearling,SR hatchery,Unkn Hat AD,,8.944802909,7.492462011,0,16.43726492,hatchery_unknown
+5,2019,yearling,SR hatchery,Unkn Hat AD,,6.084828471,4.103798348,0,10.18862682,hatchery_unknown
+6,2018,yearling,SR hatchery,Unkn Hat AD,,0,0,0,0,hatchery_unknown
+2,2022,subyearling,Wild,Wild,,0,45.92049313,375.5874574,421.5079505,wild
+3,2021,subyearling,Wild,Wild,,156.7403434,1299.776384,22.73166797,1479.248395,wild
+4,2020,subyearling,Wild,Wild,,1987.909449,1665.814346,22.73166797,3676.455463,wild
+5,2019,subyearling,Wild,Wild,,865.7348591,274.0102421,0,1139.745101,wild
+6,2018,subyearling,Wild,Wild,,0,0,0,0,wild
+2,2022,yearling,Wild,Wild,,0,0,0,0,wild
+3,2021,yearling,Wild,Wild,,0,68.88073969,61.68299697,130.5637367,wild
+4,2020,yearling,Wild,Wild,,98.92515357,109.8373702,0,208.7625238,wild
+5,2019,yearling,Wild,Wild,,169.3077579,0,0,169.3077579,wild
+6,2018,yearling,Wild,Wild,,0,0,0,0,wild

@@ -100,6 +100,11 @@ ng_expansion <- function(indiv,
 #PopPBT column containing assignment to PBT populations. Unassigned must be coded as "Unassigned"
 #Clip column specifying ad-intact or ad-clipped. 
 
+#I think that maybe the tag expansion should be applied proportionally
+#this was done in 2023
+#but was done additively in 2024 and 2025
+#if it was applied before any other expansions it wouldn't matter, because you'd be multiplying by 1
+#but in 2024 and 2025 it was done after the trap rate expansion
 pbt_expansion <- function(indiv, 
                           PbtTagRate = "PbtTagRate", 
                           count_col = "ng_expand", 
@@ -125,6 +130,7 @@ pbt_expansion <- function(indiv,
     left_join(pbt_expand_tbl %>%
                 select(Clip, PopPBT, prop_exp), by = c("PopPBT", "Clip")) %>%
     mutate(pbt_expand = .data[[count_col]] - prop_exp) %>%
+    #mutate(pbt_expand = .data[[count_col]] * (1 - prop_exp)) %>%
     select(-prop_exp)
   
   pbt_expand

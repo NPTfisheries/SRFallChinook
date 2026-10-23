@@ -1,73 +1,53 @@
 ---
-title: "Snake River Fall Chinook"
+title: "Development of an R-based tool for Snake River fall Chinook run reconstruction"
 author:
 - Michelle A. Briggs:
     email: michelleb@nezperce.org
-    institute: npt
+    institute: npt_mccall
     correspondence: yes
 - William Young:
     email: billy@nezperce.org
-    institute: npt
+    institute: npt_mccall
     correspondence: yes
-- Ryan N. Kinzer
-  email: ryank@nezperce.org
-  institute: npt
+- Ryan N. Kinzer:
+    email: ryank@nezperce.org
+    institute: npt_mccall
+    correspondence: yes
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output:
   bookdown::html_document2:
     theme: cerulean
-    toc: yes
+    toc: no
     toc_depth: 4
     toc_float:
       collapsed: no
       smooth_scroll: yes
     number_sections: yes
-    css: "../templates/styles.css"
+    #css: "../templates/styles.css"
     pandoc_args:
-    - "--lua-filter=templates/scholarly-metadata.lua"
-    - "--lua-filter=templates/author-info-blocks.lua"
-    - "--lua-filter=templates/pagebreak.lua"
+     - "--lua-filter=templates/scholarly-metadata.lua"
+     - "--lua-filter=templates/author-info-blocks.lua"
+     - "--lua-filter=templates/pagebreak.lua"
   # bookdown::word_document2:
   #   toc: yes
   #   toc_depth: 4
   #   reference_docx: "../templates/Word_template_draft.docx"
 institute:
-- npt_mccall: Nez Perce Tribe, Department of Fisheries Resources Management, 14054 Burr Dr., McCall, Idaho, 83638, USA
-- npt: Nez Perce Tribe, Department of Fisheries Resources Management
+- npt_mccall: Nez Perce Tribe, Department of Fisheries Resources Management
 csl: "templates/american-fisheries-society.csl"
 always_allow_html: yes
 editor_options: 
   chunk_output_type: console
+#bibliography: references.bib
 ---
- 
-<!-- the following inserts the NPT logo into header and sets a watermark -->
-```{=html}
-<!-- <script> -->
-<!--    $(document).ready(function() { -->
-<!--      $head = $('#header'); -->
-<!--      $head.prepend('<img src=\"NPT.png\" style=\"float: right;width: 140px;\"/>') -->
-<!--      $head.prepend('<img src=\"DFRM.png\" style=\"float: right;width: 140px;\"/>') -->
-<!--    }); -->
-<!-- </script> -->
- 
-<!-- <style> -->
-<!-- p.caption { -->
-<!--   font-size: 100%; -->
-<!-- } -->
-<!-- </style> -->
- 
- 
-<img src="templates/NPT.png" style="position:absolute;top:0px;right:100px;width: 140px;" />
-<img src="templates/DFRM.png" style="position:absolute;top:0px;right:-50px;width: 140px;" />
-<div class="watermark">DRAFT</div>
 
-```
 
 
 
 ```{r, include = F}
 library(tidyverse)
 library(ggpubr)
+library(kableExtra)
 
 plot_theme <- readRDS("scripts/plot_theme.RDS")
 
@@ -77,7 +57,7 @@ plot_theme <- readRDS("scripts/plot_theme.RDS")
 ```{r, include = F}
 hat_by_pbt_chk <- readRDS("output/hat_by_pbt_fromR.RDS")
 
-hat_by_pbt_spreadsheet <- read.csv("data_inputs/hat_by_pbt_check.csv")
+hat_by_pbt_spreadsheet <- read.csv("data_inputs/2025/hat_by_pbt_check.csv")
 hat_by_pbt_spreadsheet <- hat_by_pbt_spreadsheet %>%
   pivot_longer(cols = c("F", "M", "jack"), names_to = "Sex", values_to = "spreadsheet_count")
 
@@ -88,8 +68,8 @@ hat_by_pbt_plot <- ggplot(check_output_hatbypbt, aes(x = spreadsheet_count, y = 
   geom_abline(slope = 1, linewidth = 1) +
   geom_point(size = 4, shape = 21, color = "black", fill = "grey50") + 
   plot_theme + 
-  xlab("Original method") + 
-  ylab("New method") + 
+  xlab("Excel method") + 
+  ylab("R method") + 
   scale_x_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
   ggtitle("")
@@ -100,7 +80,7 @@ hat_by_pbt_plot <- ggplot(check_output_hatbypbt, aes(x = spreadsheet_count, y = 
 ```{r, include = F}
 final_estimates <- readRDS("output/final_estimates.RDS")
 
-final_totals <- read.csv("data_inputs/final_totals_check.csv")
+final_totals <- read.csv("data_inputs/2025/final_totals_check.csv")
 final_totals <- final_totals %>%
   pivot_longer(cols = c("F", "M", "jack"), names_to = "Sex", values_to = "spreadsheet_count")
 
@@ -108,10 +88,17 @@ final_totals <- final_totals %>%
 check_final <- full_join(final_estimates, final_totals, by = c("Sex", "RelSite", "brood_year", "age", "rearing" , "origin"))
 
 check_final <- check_final %>%
+  mutate(total = if_else(is.na(total), 0, total)) %>%
+  mutate(spreadsheet_count = if_else(is.na(spreadsheet_count), 0, spreadsheet_count)) %>%
   mutate(diff = total - spreadsheet_count) %>%
-  mutate(pct_diff = (diff/spreadsheet_count)*100)
+  mutate(pct_diff = (diff/spreadsheet_count)*100)%>%
+  filter(!(total == 0 & spreadsheet_count == 0))
 
 summary(check_final$diff)
+check_final %>% filter(is.na(diff))
+
+
+
 
 raw_diff_hist <- ggplot(check_final, aes(x = diff)) + 
   geom_histogram(fill = "grey", color = "black", binwidth = 5)  + 
@@ -119,7 +106,8 @@ raw_diff_hist <- ggplot(check_final, aes(x = diff)) +
   xlab("Difference between estimates") + 
   ylab("Count") + 
   scale_x_continuous(expand = c(0, 0), limits = c(-50, 150)) + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 125))
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 125)) + 
+  ggtitle("2025")
   
 #My method seems to have slightly underestimated wild fish abundance
 #need to look at where things went wrong
@@ -130,20 +118,18 @@ final_total_plot <- ggplot(check_final, aes(x = spreadsheet_count, y = total, gr
   geom_abline(slope = 1, linewidth = 1) +
   geom_point(size = 4, shape = 21, aes(fill = origin), color = "black") + 
   plot_theme + 
-  xlab("Original method") + 
-  ylab("New method") + 
+  xlab("Excel method") + 
+  ylab("R method") + 
   scale_x_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
-  scale_y_continuous(expand = c(0, 0), limits = c(0, 2000))
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
+  scale_fill_brewer(palette = "Dark2", name = "Origin", labels = c("Hatchery", "Hatchery unassigned", "Wild")) + 
+  ggtitle("2025")
 
 
 summary_table <- check_final %>%
   group_by(origin) %>%
-  summarise('New method' = round(sum(total, na.rm = T)), 'Original method' = sum(spreadsheet_count, na.rm = T))
-  
-
-check_final %>%
-  group_by(origin) %>%
-  summarise('New method' = sum(total, na.rm = T), 'Original method' = sum(spreadsheet_count, na.rm = T))
+  summarise('R method' = round(sum(total, na.rm = T)), 'Excel method' = round(sum(spreadsheet_count, na.rm = T))) %>%
+  mutate(year = "2025")
   
 
 hist_by_origin <- ggplot(check_final, aes(x = diff, group = origin)) + 
@@ -153,37 +139,120 @@ hist_by_origin <- ggplot(check_final, aes(x = diff, group = origin)) +
   ylab("Count") + 
   scale_x_continuous(expand = c(0, 0), limits = c(-50, 150)) + 
   scale_y_continuous(expand = c(0, 0), limits = c(0, 100)) + 
-  facet_wrap(~origin) + 
+  facet_wrap(~origin, labeller = as_labeller(c(
+    hatchery = "Hatchery", 
+    hatchery_unknown = "Hatchery unassigned", 
+    wild = "Wild"
+  ))) + 
   theme(strip.background = element_rect(fill = "grey70", color = "black"), 
         strip.text = element_text(size = 12), 
-        panel.spacing = unit(10, "mm")) + 
-  geom_vline(xintercept = 0, linewidth = 1, linetype = "dashed")
+        panel.spacing = unit(10, "mm"), 
+        legend.position = "none") + 
+  geom_vline(xintercept = 0, linewidth = 1, linetype = "dashed") + 
+  scale_fill_brewer(palette = "Dark2") + 
+  ggtitle("2025")
 
 ```
+
+
+```{r, include=F}
+#make figs for 2024 estimates
+
+check_final_2024 <- readRDS("output/final_estimates_2024.RDS")
+
+raw_diff_hist_24 <- ggplot(check_final_2024, aes(x = diff)) + 
+  geom_histogram(fill = "grey", color = "black", binwidth = 5)  + 
+  plot_theme + 
+  xlab("Difference between estimates") + 
+  ylab("Count") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(-50, 150)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 150)) + 
+  ggtitle("2024")
+  
+#My method seems to have slightly underestimated wild fish abundance
+#need to look at where things went wrong
+#likely somewhere in age assignment and particularly age assignment for outage expansion fish
+
+
+final_total_plot_24 <- ggplot(check_final_2024, aes(x = spreadsheet_count, y = total, group = origin)) + 
+  geom_abline(slope = 1, linewidth = 1) +
+  geom_point(size = 4, shape = 21, aes(fill = origin), color = "black") + 
+  plot_theme + 
+  xlab("Excel method") + 
+  ylab("R method") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 2000)) + 
+  scale_fill_brewer(palette = "Dark2", name = "Origin", labels = c("Hatchery", "Hatchery unassigned", "Wild")) + 
+  ggtitle("2024")
+
+
+summary_table_24 <- check_final_2024 %>%
+  group_by(origin) %>%
+  summarise('R method' = round(sum(total, na.rm = T)), 'Excel method' = round(sum(spreadsheet_count, na.rm = T))) %>%
+  mutate(year = "2024")
+  
+
+hist_by_origin_24 <- ggplot(check_final_2024, aes(x = diff, group = origin)) + 
+  geom_histogram(aes(fill = origin), color = "black", binwidth = 5)  + 
+  plot_theme + 
+  xlab("Difference between estimates") + 
+  ylab("Count") + 
+  scale_x_continuous(expand = c(0, 0), limits = c(-50, 150)) + 
+  scale_y_continuous(expand = c(0, 0), limits = c(0, 125)) + 
+  facet_wrap(~origin, labeller = as_labeller(c(
+    hatchery = "Hatchery", 
+    hatchery_unknown = "Hatchery unassigned", 
+    wild = "Wild"
+  ))) + 
+  theme(strip.background = element_rect(fill = "grey70", color = "black"), 
+        strip.text = element_text(size = 12), 
+        panel.spacing = unit(10, "mm"), 
+        legend.position = "none") + 
+  geom_vline(xintercept = 0, linewidth = 1, linetype = "dashed") + 
+  scale_fill_brewer(palette = "Dark2") + 
+  ggtitle("2024")
+
+comparison_table <- rbind(summary_table_24, summary_table) %>%
+  rename(Origin = origin) %>%
+  mutate(Origin = as.factor(Origin)) %>%
+  mutate(Origin = fct_recode(Origin, "Hatchery" = "hatchery", 
+                    "Hatchery unassigned" = "hatchery_unknown", 
+                    "Wild" = "wild"))
+
+grp_yr <- rle(as.character(comparison_table$year))
+index_yr <- setNames(grp_yr$lengths, grp_yr$values)
+```
+
+
+We developed an R-based tool to estimate abundance and stock composition of Snake River fall Chinook returning to Lower Granite Dam. The R-based tool uses the same methods as the current run reconstruction methodology, but implements run reconstruction using R rather than Excel. We compared abundance estimates by sex, age, origin, and release group from the R-based and original methods. The estimates produced using the R-based tool aligned well with the original estimates (Figures 1 - 2). Typically, discrepancies between the two methods were small (e.g., <5). Differences between the two methods were typically centered around zero, indicating the R-based method did not show consistent, directional bias when compared to the original method. However, the R-based method consistently underestimated the abundance of wild-origin fish in 2025, which was a result of differences in the age assignment methods applied to wild fish after accounting for trap outages in 2025 (Figure 3). Adjustments to the R-based tool are ongoing to improve agreement between the two methods. Additionally, the R tool does not currently account for fall Chinook that arrive at Lower Granite Dam before the trapping season begins on August 15, so estimates represent escapement from August 15 - November 15. 
+
 
 
 ```{r, echo = F}
-knitr::kable(summary_table, 
-             caption = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam by origin produced by the original and new method.")
+
+comparison_table %>%
+  select(-year) %>%
+  kbl(caption = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam by origin for 2024 and 2025 using the original (Excel-based) and new (R-based) method.") %>%
+  kable_paper("striped") %>%
+  pack_rows(index = index_yr)
+
+
 ```
 
 
-```{r hat-by-pbt, fig.cap = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam for hatchery-assigned fish by age, sex, and release group. Estimates account for fallback and re-ascension, but do not account for trap outage periods.", echo=F, warning = F}
-hat_by_pbt_plot
-```
-
-```{r final-total, fig.width = 10, fig.cap = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam by age, sex, and release group. Estimates account for fallback and re-ascension and trap outage, including an expansion for the end of the run. Estiamtes account for fallback and re-ascension and trap outage periods.", echo = F, warning = F}
-final_total_plot
+```{r final-total, fig.height = 12, fig.width = 8, fig.cap = "Estimates of Snake River fall Chinook escapement to Lower Granite Dam by age, sex, release group, and origin. Estimates account for fallback and re-ascension and trap outage, including an expansion for the end of the run.", echo = F, warning = F}
+ggarrange(final_total_plot_24, final_total_plot, align = "hv", ncol = 1, common.legend = TRUE)
 ```
 
 
-```{r diff-hist, fig.cap = "The difference in the estimates of escapement by age, sex, and release group between the original and new method. Estiamtes account for fallback and re-ascension and trap outage periods.", echo=F, warning=FALSE}
-raw_diff_hist
+```{r diff-hist, fig.width = 12, fig.height = 8, fig.cap = "The difference in the estimates of escapement by age, sex, and release group between the original and new method. Estimates account for fallback and re-ascension and trap outage periods.", echo=F, warning=FALSE}
+ggarrange(raw_diff_hist_24, raw_diff_hist, align = "hv", ncol = 2)
 ```
 
 
-```{r hist-by-origin, fig.width = 12, fig.height = 7, fig.cap = "The difference in the estimates of escapement by age, sex, and release group between the original and new method. Estiamtes account for fallback and re-ascension and trap outage periods.", echo = F, warning = F}
-hist_by_origin
+```{r hist-by-origin, fig.width = 12, fig.height = 12, fig.cap = "The difference in the estimates of escapement by age, sex, origin, and release group between the original and new method. Estimates account for fallback and re-ascension and trap outage periods.", echo = F, warning = F}
+
+ggarrange(hist_by_origin_24, hist_by_origin, align = "hv", ncol = 1)
 ```
 
 
