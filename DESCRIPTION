@@ -1,0 +1,25 @@
+Package: SRFallChinook
+Title: Snake River Fall Chinook Run Reconstruction
+Version: 0.1.0
+Authors@R: c(
+  person("Michelle A.", "Briggs", email = "michelleb@nezperce.org", 
+  role = c("aut", "cre")), 
+  person("William", "Young", email = "billy@nezperce.org", 
+  role = c("aut", "ctb"))
+  )
+Description: R-based tool to estimate abundance and composition of Snake River fall Chinook salmon returning to Lower Granite Dam using parentage-based tagging.
+URL: https://github.com/NPTfisheries/SRFallChinook
+License: GLP-3
+Imports:
+  dplyr, 
+  purrr,
+  stringr,
+  tibble,
+  lubridate,
+  tidyr
+Suggests:
+  gglot2
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+VignetteBuilder: knitr
+Config/roxygen2/version: 8.1.0
